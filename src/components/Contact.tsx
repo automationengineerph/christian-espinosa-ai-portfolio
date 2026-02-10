@@ -79,11 +79,10 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              disabled={sending}
-              className="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex items-center gap-2 disabled:opacity-50"
+              className="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex items-center gap-2"
             >
               <Send size={14} />
-              {sending ? "Sending..." : "Send Message"}
+              Send Message
             </button>
           </motion.form>
 
