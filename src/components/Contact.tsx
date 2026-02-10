@@ -5,7 +5,6 @@ import { toast } from "sonner";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sending, setSending] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -13,12 +12,11 @@ const Contact = () => {
       toast.error("Please fill in all fields");
       return;
     }
-    setSending(true);
-    setTimeout(() => {
-      toast.success("Message sent! I'll get back to you soon.");
-      setForm({ name: "", email: "", message: "" });
-      setSending(false);
-    }, 1000);
+    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
+    window.location.href = `mailto:christian.t.espinosa@gmail.com?subject=${subject}&body=${body}`;
+    toast.success("Opening your email client...");
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
@@ -81,11 +79,10 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              disabled={sending}
-              className="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex items-center gap-2 disabled:opacity-50"
+              className="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex items-center gap-2"
             >
               <Send size={14} />
-              {sending ? "Sending..." : "Send Message"}
+              Send Message
             </button>
           </motion.form>
 

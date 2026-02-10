@@ -50,7 +50,9 @@ const Hero = () => {
               Contact Me
             </button>
             <a
-              href="#"
+              href="https://docs.google.com/document/d/1qpuj20xN6zVULwVlB_sZ6HIiy_oNV-9fsYlIcI2CMz8/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="border border-hero-foreground/20 text-hero-foreground px-7 py-3 rounded-lg font-medium text-sm hover:bg-hero-foreground/5 transition-colors"
             >
               Download Resume
