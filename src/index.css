@@ -80,12 +80,21 @@
   }
 
   .glass-card {
-    background: hsla(0, 0%, 100%, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid hsla(215, 25%, 88%, 0.6);
+    background: hsla(0, 0%, 100%, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsla(215, 25%, 88%, 0.5);
+    box-shadow: 0 1px 3px hsla(220, 40%, 13%, 0.04), 0 4px 16px hsla(220, 40%, 13%, 0.03);
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 2px 8px hsla(220, 40%, 13%, 0.06), 0 8px 32px hsla(220, 40%, 13%, 0.06);
   }
 
   .section-padding {
-    @apply px-6 py-20 md:px-12 lg:px-24;
+    @apply px-6 py-24 md:px-12 lg:px-24;
+  }
+
+  .section-heading {
+    @apply font-display text-3xl md:text-4xl font-bold text-foreground mb-2 tracking-tight;
   }
 }
