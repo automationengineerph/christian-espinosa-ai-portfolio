@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Workflow, BookOpen, BarChart3, Calendar, Mail, ExternalLink } from "lucide-react";
+import { Workflow, BookOpen, BarChart3, Calendar, Mail, ExternalLink, ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -48,11 +48,11 @@ const projects = [
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
@@ -65,10 +65,11 @@ const Projects = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-          Projects
-        </h2>
-        <div className="w-12 h-1 bg-accent rounded mb-10" />
+        <h2 className="section-heading">Projects</h2>
+        <div className="w-12 h-1 bg-accent rounded mb-3" />
+        <p className="text-muted-foreground text-sm mb-10 max-w-md">
+          Real tools I've built using AI-assisted development platforms.
+        </p>
       </motion.div>
 
       <motion.div
@@ -76,7 +77,7 @@ const Projects = () => (
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid md:grid-cols-3 gap-6"
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {projects.map((p) => (
           <motion.a
@@ -85,24 +86,33 @@ const Projects = () => (
             href={p.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-xl overflow-hidden hover:shadow-lg transition-shadow group block"
+            className="glass-card rounded-xl overflow-hidden group block transition-all duration-300 hover:translate-y-[-2px]"
           >
             <div className="hero-gradient p-6 flex items-center justify-center h-32 relative">
-              <p.icon size={40} className="text-hero-accent opacity-80 group-hover:opacity-100 transition-opacity" />
-              <ExternalLink size={16} className="absolute top-4 right-4 text-hero-accent opacity-0 group-hover:opacity-80 transition-opacity" />
+              <p.icon size={36} className="text-hero-accent opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+              <ArrowUpRight size={16} className="absolute top-4 right-4 text-hero-accent/0 group-hover:text-hero-accent/80 transition-all duration-300" />
             </div>
             <div className="p-6">
-              <h3 className="font-display font-semibold text-foreground mb-1 flex items-center gap-2">
-                {p.title}
-                {p.year && <span className="text-xs text-muted-foreground font-normal">({p.year})</span>}
-              </h3>
-              <p className="text-muted-foreground text-sm mb-3 leading-relaxed">{p.desc}</p>
-              <p className="text-accent text-xs font-medium mb-4">✓ {p.result}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="font-display font-semibold text-foreground text-[15px] leading-snug">
+                  {p.title}
+                </h3>
+                {p.year && (
+                  <span className="text-[10px] text-accent bg-accent/10 px-1.5 py-0.5 rounded font-medium shrink-0">
+                    {p.year}
+                  </span>
+                )}
+              </div>
+              <p className="text-muted-foreground text-sm mb-3 leading-relaxed line-clamp-3">{p.desc}</p>
+              <p className="text-accent text-xs font-medium mb-4 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
+                {p.result}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
                 {p.tags.map((t) => (
                   <span
                     key={t}
-                    className="text-xs bg-accent/10 text-accent px-2.5 py-1 rounded-full font-medium"
+                    className="text-[11px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-medium"
                   >
                     {t}
                   </span>

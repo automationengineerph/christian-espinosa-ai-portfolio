@@ -29,12 +29,10 @@ const Skills = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-          Skills
-        </h2>
+        <h2 className="section-heading">Skills</h2>
         <div className="w-12 h-1 bg-accent rounded mb-3" />
         <p className="text-muted-foreground text-sm mb-10 max-w-md">
-          As a beginner, these are areas I'm actively learning and applying through self-study.
+          Areas I'm actively learning and applying through self-study and hands-on projects.
         </p>
       </motion.div>
 
@@ -49,13 +47,13 @@ const Skills = () => (
           <motion.div
             key={s.title}
             variants={item}
-            className="glass-card rounded-xl p-6 hover:shadow-md transition-shadow group"
+            className="glass-card rounded-xl p-6 group transition-all duration-300"
           >
-            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
               <s.icon size={18} className="text-accent" />
             </div>
             <h3 className="font-display font-semibold text-foreground mb-1">{s.title}</h3>
-            <p className="text-muted-foreground text-sm">{s.desc}</p>
+            <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
           </motion.div>
         ))}
       </motion.div>

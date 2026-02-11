@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { User, Mail, Phone } from "lucide-react";
+import { User, Mail, Phone, MapPin } from "lucide-react";
 
 const About = () => (
   <section id="about" className="section-padding bg-background">
@@ -10,13 +10,11 @@ const About = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-          About Me
-        </h2>
-        <div className="w-12 h-1 bg-accent rounded mb-8" />
+        <h2 className="section-heading">About Me</h2>
+        <div className="w-12 h-1 bg-accent rounded mb-10" />
 
         <div className="grid md:grid-cols-3 gap-10">
-          <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
+          <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed text-[15px]">
             <p>
               From Pasig, Philippines, I'm new to the field but excited about AI's
               potential in automation. I understand software development workflows,
@@ -33,33 +31,24 @@ const About = () => (
 
           <div className="space-y-5">
             <div className="glass-card rounded-xl p-5 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <User size={16} className="text-accent" />
+              {[
+                { icon: User, label: "Name", value: "Christian Espinosa" },
+                { icon: Phone, label: "Phone", value: "09289258127" },
+                { icon: Mail, label: "Email", value: "christian.t.espinosa@gmail.com", small: true },
+                { icon: MapPin, label: "Location", value: "Pasig, Philippines" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                    <item.icon size={16} className="text-accent" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs text-muted-foreground">{item.label}</p>
+                    <p className={`font-medium text-foreground truncate ${item.small ? 'text-xs' : 'text-sm'}`}>
+                      {item.value}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Name</p>
-                  <p className="text-sm font-medium text-foreground">Christian Espinosa</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Phone size={16} className="text-accent" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Phone</p>
-                  <p className="text-sm font-medium text-foreground">09289258127</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Mail size={16} className="text-accent" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Email</p>
-                  <p className="text-sm font-medium text-foreground text-xs">christian.t.espinosa@gmail.com</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
