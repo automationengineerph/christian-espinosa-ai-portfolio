@@ -1,7 +1,43 @@
 import { motion } from "framer-motion";
 import { MapPin, ArrowDown, Download, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const roles = [
+  "AI Automation Engineer",
+  "Process Optimizer",
+  "Documentation Specialist",
+  "Workflow Designer",
+];
 
 const Hero = () => {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = roles[roleIndex];
+    const speed = isDeleting ? 40 : 70;
+
+    if (!isDeleting && displayed === current) {
+      const pause = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(pause);
+    }
+
+    if (isDeleting && displayed === "") {
+      setIsDeleting(false);
+      setRoleIndex((i) => (i + 1) % roles.length);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setDisplayed(
+        isDeleting ? current.slice(0, displayed.length - 1) : current.slice(0, displayed.length + 1)
+      );
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [displayed, isDeleting, roleIndex]);
+
   const scrollToContact = () =>
     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
   const scrollToAbout = () =>
@@ -15,8 +51,16 @@ const Hero = () => {
       }} />
 
       {/* Glow orbs */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-hero-accent/10 blur-[120px]" />
-      <div className="absolute bottom-1/3 left-1/6 w-64 h-64 rounded-full bg-hero-accent/5 blur-[100px]" />
+      <motion.div
+        animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.15, 0.1] }}
+        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+        className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-hero-accent/10 blur-[120px]"
+      />
+      <motion.div
+        animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
+        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 2 }}
+        className="absolute bottom-1/3 left-[16%] w-64 h-64 rounded-full bg-hero-accent/5 blur-[100px]"
+      />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
         <motion.div
@@ -42,8 +86,12 @@ const Hero = () => {
             <span className="text-gradient">Espinosa</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-hero-muted font-light mb-4 max-w-lg">
-            Aspiring AI Automation Engineer
+          <p className="text-lg md:text-xl text-hero-muted font-light mb-4 max-w-lg h-8">
+            Aspiring{" "}
+            <span className="text-hero-accent font-medium">
+              {displayed}
+              <span className="inline-block w-[2px] h-5 bg-hero-accent ml-0.5 animate-pulse align-middle" />
+            </span>
           </p>
 
           <p className="text-hero-foreground/60 text-sm md:text-base leading-relaxed mb-10 max-w-lg">
@@ -51,22 +99,26 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <button
+            <motion.button
               onClick={scrollToContact}
-              className="bg-accent text-accent-foreground px-7 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-all hover:translate-y-[-1px] flex items-center gap-2 shadow-lg shadow-accent/20"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="bg-accent text-accent-foreground px-7 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-accent/20"
             >
               <MessageCircle size={15} />
               Contact Me
-            </button>
-            <a
+            </motion.button>
+            <motion.a
               href="https://docs.google.com/document/d/1qpuj20xN6zVULwVlB_sZ6HIiy_oNV-9fsYlIcI2CMz8/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-hero-foreground/20 text-hero-foreground px-7 py-3 rounded-lg font-medium text-sm hover:bg-hero-foreground/5 transition-all hover:translate-y-[-1px] flex items-center gap-2"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="border border-hero-foreground/20 text-hero-foreground px-7 py-3 rounded-lg font-medium text-sm hover:bg-hero-foreground/5 transition-all flex items-center gap-2"
             >
               <Download size={15} />
               Download Resume
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 

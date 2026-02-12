@@ -13,11 +13,17 @@ const Experience = () => (
         <h2 className="section-heading">Experience</h2>
         <div className="w-12 h-1 bg-accent rounded mb-10" />
 
-        <div className="glass-card rounded-xl p-8 max-w-2xl">
-          <div className="flex items-start gap-5">
-            <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+        <div className="glass-card rounded-xl p-8 max-w-2xl relative overflow-hidden group">
+          {/* Decorative accent line */}
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent/50 to-transparent rounded-l-xl" />
+          
+          <div className="flex items-start gap-5 pl-4">
+            <motion.div
+              whileHover={{ rotate: 5, scale: 1.05 }}
+              className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0"
+            >
               <Briefcase size={20} className="text-accent" />
-            </div>
+            </motion.div>
             <div className="space-y-3">
               <div>
                 <h3 className="font-display font-semibold text-foreground text-lg">
@@ -42,12 +48,17 @@ const Experience = () => (
               
               <div className="flex flex-wrap gap-6 pt-2">
                 {[
-                  { label: "Brainstorming", pct: "20%" },
-                  { label: "Documentation", pct: "40%" },
-                  { label: "Building Automations", pct: "40%" },
+                  { label: "Brainstorming", pct: 20 },
+                  { label: "Documentation", pct: 40 },
+                  { label: "Building Automations", pct: 40 },
                 ].map((i) => (
-                  <div key={i.label} className="text-center">
-                    <p className="font-display font-bold text-accent text-xl">{i.pct}</p>
+                  <div key={i.label} className="text-center group/stat">
+                    <motion.p
+                      whileHover={{ scale: 1.1 }}
+                      className="font-display font-bold text-accent text-xl cursor-default"
+                    >
+                      {i.pct}%
+                    </motion.p>
                     <p className="text-muted-foreground text-xs mt-0.5">{i.label}</p>
                   </div>
                 ))}

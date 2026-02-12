@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Workflow, BookOpen, BarChart3, Calendar, Mail, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Workflow, BookOpen, BarChart3, Calendar, Mail, ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -86,11 +86,15 @@ const Projects = () => (
             href={p.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-xl overflow-hidden group block transition-all duration-300 hover:translate-y-[-2px]"
+            whileHover={{ y: -6, transition: { duration: 0.25 } }}
+            className="glass-card rounded-xl overflow-hidden group block transition-shadow duration-300 hover:shadow-xl hover:shadow-accent/5"
           >
-            <div className="hero-gradient p-6 flex items-center justify-center h-32 relative">
-              <p.icon size={36} className="text-hero-accent opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
-              <ArrowUpRight size={16} className="absolute top-4 right-4 text-hero-accent/0 group-hover:text-hero-accent/80 transition-all duration-300" />
+            <div className="hero-gradient p-6 flex items-center justify-center h-32 relative overflow-hidden">
+              <motion.div
+                className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-500"
+              />
+              <p.icon size={36} className="text-hero-accent opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 relative z-10" />
+              <ArrowUpRight size={16} className="absolute top-4 right-4 text-hero-accent/0 group-hover:text-hero-accent/80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
             </div>
             <div className="p-6">
               <div className="flex items-center gap-2 mb-2">
