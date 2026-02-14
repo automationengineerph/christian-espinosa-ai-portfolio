@@ -16,7 +16,7 @@ const Footer = () => (
       </div>
       <div className="flex gap-3">
         {[
-          { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
+          { href: "https://www.linkedin.com/in/christian-espinosa-work/", icon: Linkedin, label: "LinkedIn" },
           { href: "https://github.com", icon: Github, label: "GitHub" },
           { href: "mailto:christian.t.espinosa@gmail.com", icon: Mail, label: "Email" },
         ].map((s) => (
