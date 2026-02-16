@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -14,6 +15,7 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -44,34 +46,54 @@ const Navbar = () => {
           CE<span className="text-gradient">.</span>
         </button>
 
-        {/* Desktop */}
-        <ul className="hidden md:flex gap-8">
-          {navLinks.map((l) => (
-            <li key={l.href}>
-              <button
-                onClick={() => handleClick(l.href)}
-                className={`text-sm font-medium transition-colors hover:text-accent ${
-                  scrolled ? "text-foreground" : "text-hero-foreground/80"
-                }`}
-              >
-                {l.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center gap-8">
+          <ul className="flex gap-8">
+            {navLinks.map((l) => (
+              <li key={l.href}>
+                <button
+                  onClick={() => handleClick(l.href)}
+                  className={`text-sm font-medium transition-colors hover:text-accent ${
+                    scrolled ? "text-foreground" : "text-hero-foreground/80"
+                  }`}
+                >
+                  {l.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className={`p-2 rounded-full transition-colors hover:bg-accent/10 ${
+              scrolled ? "text-foreground" : "text-hero-foreground"
+            }`}
+          >
+            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+        </div>
 
         {/* Mobile toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? (
-            <X className={scrolled ? "text-foreground" : "text-hero-foreground"} />
-          ) : (
-            <Menu className={scrolled ? "text-foreground" : "text-hero-foreground"} />
-          )}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className={`p-2 rounded-full transition-colors ${
+              scrolled ? "text-foreground" : "text-hero-foreground"
+            }`}
+          >
+            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <X className={scrolled ? "text-foreground" : "text-hero-foreground"} />
+            ) : (
+              <Menu className={scrolled ? "text-foreground" : "text-hero-foreground"} />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

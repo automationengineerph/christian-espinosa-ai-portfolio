@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -13,7 +14,7 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 
 const Index = () => (
-  <>
+  <ThemeProvider>
     <Navbar />
     <Hero />
     <About />
@@ -27,7 +28,7 @@ const Index = () => (
     <Contact />
     <Footer />
     <BackToTop />
-  </>
+  </ThemeProvider>
 );
 
 export default Index;
